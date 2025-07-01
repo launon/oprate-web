@@ -1,4 +1,4 @@
-const CommodityIndex = () => import('../views/commodityList/CommodityIndex.vue');
+const CommodityIndex = () => import('../src/views/commodityList/CommodityIndex.vue');
 
 export default [
     {path:'/commodity/index', component: CommodityIndex}

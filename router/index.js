@@ -1,18 +1,17 @@
-import VueRouter from 'vue-router'
-import Vue from 'vue';
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(VueRouter)
+const routerHistory = createWebHistory();
 
-const Home = () => import('../views/Home.vue');
-const Index = () => import('../views/Index.vue');
-const NotFound = () => import('../views/NotFound.vue');
+const Home = () => import('../src/Home.vue');
+const Index = () => import('../src/Index.vue');
+const NotFound = () => import('../src/NotFound.vue');
 
 import homeRouter from './homePage.js'
 import personalRouter from './personal.js'
 import userRouter from './user.js'
 import commodityRouter from './commodityIndex.js'
 
-const routers = [
+const routes = [
     {path:'/', component: Home, children: [
         {path:'/index', component: Index},
         ...homeRouter,
@@ -20,11 +19,12 @@ const routers = [
         ...userRouter,
         ...commodityRouter,
     ]},
-    {path:'*', component: NotFound}
+    {path:'/:pathMatch(.*)*', component: NotFound}
 ]
 
-const router = new VueRouter({
-    router: routers,
+const router = new createRouter({
+    history:routerHistory,
+    routes,
 });
 
 export default router;
