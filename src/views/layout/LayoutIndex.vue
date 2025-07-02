@@ -4,7 +4,6 @@
             <ul class="layout-menu__root">
                 <li v-for="(menu, i) in menus" :key="i">
                     <a href="javascript:;" @click.prevent.stop="onClickMenu(menu.name)">{{ menu.name }}</a>
-                     <!-- <span>{{ menu }}</span> -->
                 </li>
             </ul>
         </div>
@@ -15,7 +14,7 @@ import router from '../../router';
 import { ref, onMounted, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router';
 
-let menus = ref([]);
+let menus = ref();
 let thisRouter = useRouter();
 const { ctx } = getCurrentInstance();
 function filterMenu() {
@@ -37,7 +36,7 @@ function filterMenu() {
             path: '/user/index'
         },
     ];
-    menus.value.push(menu);
+    menus.value = menu;
     selectedPath();
     // 通知父组件已生成的菜单列表
     ctx.$emit('menus', menus);
@@ -56,6 +55,14 @@ function selectedPath() {
             menu['active'] = true;
         } else {
             menu['active'] = false;
+        }
+    }
+}
+
+function onClickMenu(name) {
+    for (let menu of menus.value) {
+        if (menu.name == name) {
+            ctx.$router.push(menu.path);
         }
     }
 }
