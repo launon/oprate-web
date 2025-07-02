@@ -62,7 +62,7 @@ function selectedPath() {
 function onClickMenu(name) {
     for (let menu of menus.value) {
         if (menu.name == name) {
-            ctx.$router.push(menu.path);
+            thisRouter.push(menu.path);
         }
     }
 }
