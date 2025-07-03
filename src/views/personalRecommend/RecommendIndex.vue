@@ -1,3 +1,3 @@
 <template>
-    <div>个人</div>
+    <div>推荐</div>
 </template>

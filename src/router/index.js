@@ -9,7 +9,7 @@ const NotFound = () => import('../views/NotFound.vue');
 import homeRouter from './homePage.js'
 import personalRouter from './personal.js'
 import userRouter from './user.js'
-import commodityRouter from './commodityIndex.js'
+import articleRouter from './articleIndex.js'
 
 const routes = [
     {path:'/', component: Home, children: [
@@ -17,7 +17,7 @@ const routes = [
         ...homeRouter,
         ...personalRouter,
         ...userRouter,
-        ...commodityRouter,
+        ...articleRouter,
     ]},
     {path:'/:pathMatch(.*)*', component: NotFound}
 ]

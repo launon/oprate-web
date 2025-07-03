@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router';
 let menus = ref();
 let thisRouter = useRouter();
 const { ctx } = getCurrentInstance();
-function filterMenu() {
+const filterMenu = () => {
     let menu = [
         {
             name: '首页',
@@ -25,10 +25,10 @@ function filterMenu() {
         },
         {
             name: '分类',
-            path: '/commodity/index'
+            path: '/article/index'
         },
         {
-            name: '个人推荐',
+            name: '文章推荐',
             path: '/personal/index'
         },
         {
@@ -44,7 +44,7 @@ function filterMenu() {
 /**
 * 根据当前页面地址重新选中菜单
 */
-function selectedPath() {
+const selectedPath = () => {
     //获取当前页面地址
     let path = thisRouter.currentRoute.value.path;
     //重置菜单选中状态
@@ -58,7 +58,7 @@ function selectedPath() {
     }
 }
 
-function onClickMenu(name) {
+const onClickMenu = (name) => {
     for (let menu of menus.value) {
         if (menu.name == name) {
             thisRouter.push(menu.path);
