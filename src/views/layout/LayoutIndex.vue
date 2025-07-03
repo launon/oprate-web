@@ -47,7 +47,6 @@ function filterMenu() {
 function selectedPath() {
     //获取当前页面地址
     let path = thisRouter.currentRoute.value.path;
-    console.log(path, 22222222)
     //重置菜单选中状态
     for (let menu of menus.value) {
         //根据当前地址匹配父级菜单
