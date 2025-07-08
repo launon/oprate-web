@@ -15,8 +15,7 @@ export default {
     //     return response;
     // },
 
-    topImage(params){
-        let url = 'https://jsonplaceholder.typicode.com/posts';
+    topImage(url,params){
         return http.getRequest(url, params);
     }
 }
