@@ -1,4 +1,4 @@
-import http from './api/http'
+import http from './api/http';
 
 export default {
     // topImage(params) {
@@ -18,4 +18,4 @@ export default {
     topImage(url,params){
         return http.getRequest(url, params);
     }
-}
+};

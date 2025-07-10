@@ -2,4 +2,4 @@ const PersonalRecommend = () => import('../views/personalRecommend/RecommendInde
 
 export default [
     {path:'/personal/index', component: PersonalRecommend}
-]
+];

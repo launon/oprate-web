@@ -1,12 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router/index.js'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router/index.js';
 
 // 引入公共样式文件
-import './style/public.less'
+import './style/public.less';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
-app.mount('#app')
+app.use(router);
+app.mount('#app');
 
