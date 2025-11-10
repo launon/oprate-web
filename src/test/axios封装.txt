@@ -1,0 +1,48 @@
+import axios from 'axios';
+
+// 异常处理，根据状态码去分别处理。401代表未授权，此时通过switch case识别后进行页面跳转至登录页（router.replace）。
+// 403代表请求发送但服务器拒绝处理，常见情况是到登录信息过期，此时应先清除当前token，再自动跳转至登录页。
+// 404代表无法找到请求的资源，常见情况是跳转页面不存在。若有编写相关404页面，应自动跳转至对应页面。
+// 若有其他异常，使用default通过弹窗等形式提示。
+
+// 处理成功的请求
+/*
+ * @param {object} res - axios 响应对象
+ * @return {any} 处理后的数据
+*/
+function success(res){
+  if(res && res.data){
+    return res;
+  }else{
+    throw new Error(res.data ? res.data.message : "未知错误")
+  };
+}
+
+/*
+ * @param {object} err - axios 错误对象
+ * @return {Promise<never>} 抛出错误
+*/
+// 处理失败的请求
+function error(err){
+  // 这里可以根据err.response.status做更详细的处理
+  if(err.response && err.response.data && err.response.data.message){
+    throw new Error(err.response.data.message);
+  }else {
+    throw new Error(err.message || "网络错误");
+  }
+}
+
+
+async function getRequest(url, params = {}){
+  return axios.get('/url' + url, {params}).then(
+    res => success(res);
+  ).catch(
+    err => error(err);
+  )
+}
+
+async function postRequest(url, params = {}{
+  return await axios.post(url, {params});
+});
+
+export default {getRequest, postRequest}

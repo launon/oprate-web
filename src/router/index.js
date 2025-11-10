@@ -32,7 +32,6 @@ const router = new createRouter({
 //添加路由钩子函数，默认/进入首页
 router.beforeEach(async (to, from, next) => {
     if (to.fullPath === '/') {
-        console.log(111);
         router.push('/homepage/index');
     } else {
         next();

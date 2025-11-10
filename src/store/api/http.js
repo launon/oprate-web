@@ -55,4 +55,4 @@ async function postRequest(url, data) {
     return await axios.post(url, data);
 }
 
-export default { getRequest, postRequest, success, error };
+export default { getRequest, postRequest };

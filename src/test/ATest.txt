@@ -1,0 +1,90 @@
+// 请求拦截
+axios.interceptors.request.use(function (config){
+    // Do something before request is sent
+    return config;
+
+    // 拦截穿透
+    // 输出问题后，响应拦截直接失败，走到axios请求的catch中
+    throw '参数出现问题'
+  },function (error){
+    // Do someting with request is error
+    return Promise.reject(error);
+  }
+)
+// 响应拦截
+axios.interceptors.response.use(function (response){
+    // Do someting before response is sent
+    return response;
+  },function (error){
+    // Do someting with response is error
+    return Promise.reject(error);
+  }
+)
+
+axios({
+  method:"GET",
+  url:"http://localhost:8080/port"
+}).then(response => {
+  console.log(response);
+  return response;
+}).catch(error =>{
+  console.log(error);
+  return error;
+})
+
+-----------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>请求拦截</title>
+</head>
+<body>
+  <div class="container">
+    <h2>取消请求</h2>
+    <button class="btn btn-primary">发送请求</button>
+    <button class="btn btn-warning">取消请求</button>
+  </div>
+  <script>
+    // 获取按钮
+    const btns = document.querySelectAll('button');
+    // 2.声明全局变量
+    let cancel = null
+    // 发送请求
+    btns[0].onclick = function(){
+      if (cancel !== null){
+        // 取消上一次请求，防止在第一次请求未返回后的多次请求
+        cancel()
+      }
+      axios({
+        method:"GET",
+        url:"http://localhost:3000/port",
+        // 1.添加配置对象的属性
+        cancelToken: new axios.CancelToken(funciton (c){
+          // 3.将c的值赋值给cancel
+          cancel = c;
+        })
+      }).then(res => {
+        console.log(res);
+        // 初始化cancel
+        cancel = null;
+      })
+    }
+
+    // 绑定第二个事件
+    btns[1].onclick = function(){
+      cancel()
+    }
+  </script>
+</body>
+</html>
+
+
+
+axios({
+  url:"http://localhost:9000/port",
+  method:"GET"
+}).then(res => {
+  console.log(res)
+})
