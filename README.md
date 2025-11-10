@@ -25,3 +25,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 该网站目前暂定为个人博客网站，。
+
+v0.0.0  2025-11-10
+合并测试
